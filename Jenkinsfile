@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'suffyanali/flask-jenkins-app'  // Replace with your Docker Hub username
+        IMAGE_NAME = 'suffyandevops/flask-jenkins-app'  
     }
 
     stages {
