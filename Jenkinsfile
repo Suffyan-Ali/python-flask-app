@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'flask-jenkins-app'
+        IMAGE_NAME = 'suffyanali/flask-jenkins-app'  // Replace with your Docker Hub username
     }
 
     stages {
@@ -14,20 +14,28 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("${IMAGE_NAME}")
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                 }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                sh 'docker push $IMAGE_NAME'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                script {
-                    // Stop previous container if running
-                    sh 'docker rm -f flask_container || true'
-                    // Run new container
-                    sh 'docker run -d --name flask_container -p 5000:5000 flask-jenkins-app'
-                }
+                sh 'docker rm -f flask_container || true'
+                sh 'docker run -d --name flask_container -p 5000:5000 $IMAGE_NAME'
             }
         }
     }
