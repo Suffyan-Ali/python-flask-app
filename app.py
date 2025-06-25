@@ -54,7 +54,7 @@ def about():
     return render_template_string(base_template, title="About", active="about", content="""
         <div class="text-center">
             <h2>About This Project</h2>
-            <p class="mt-3">This web app was automatically built and deployed using Jenkins whenever code is pushed to GitHub.</p>
+            <p class="mt-3">Thiss web app was automatically built and deployed using Jenkins whenever code is pushed to GitHub.</p>
             <p>Created by <strong>Suffyan Ali</strong>, a passionate learner of DevOps and CI/CD practices.</p>
         </div>
     """)
