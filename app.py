@@ -38,7 +38,7 @@ base_template = """
 def home():
     return render_template_string(base_template, title="Home", active="home", content="""
         <div class="text-center">
-            <h1 class="mb-4">🚀 Welcome to Jenkins + Docker Flask App</h1>
+            <h1 class="mb-4">🚀 Welcome to AWS + Docker Flask App</h1>
             <p class="lead">This app demonstrates a CI/CD pipeline using:</p>
             <ul class="list-group list-group-flush w-50 mx-auto">
                 <li class="list-group-item">Python & Flask</li>
